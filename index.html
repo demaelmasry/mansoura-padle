@@ -1,249 +1,183 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mansoura Paddle Open 2026</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #0f172a, #1e293b);
-            color: #f1f5f9;
-            line-height: 1.6;
-        }
-        header {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 10;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-        }
-        .logo {
-            background: #059669;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 1rem;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        nav a {
-            text-decoration: none;
-            color: #cbd5e1;
-            margin: 0 1rem;
-            transition: color 0.3s, transform 0.3s;
-        }
-        nav a:hover {
-            color: #10b981;
-            transform: translateY(-2px);
-        }
-        main {
-            padding-top: 5rem;
-        }
-        section {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 2rem;
-            animation: fadeInUp 1s ease-out;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            align-items: center;
-        }
-        .hero h1 { font-size: 2.5rem; font-weight: bold; }
-        .hero p { color: #cbd5e1; }
-        .btn {
-            display: inline-block;
-            background: #059669;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            margin: 0.5rem;
-            transition: background 0.3s, transform 0.3s;
-        }
-        .btn:hover { background: #047857; transform: translateY(-3px); }
-        .btn.secondary { background: #334155; color: #f1f5f9; }
-        .btn.secondary:hover { background: #475569; }
-        .card {
-            background: linear-gradient(135deg, #1e293b, #334155);
-            border-radius: 1rem;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            margin: 1rem 0;
-            color: #f1f5f9;
-            transition: transform 0.3s ease;
-        }
-        .card:hover { transform: translateY(-5px); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-        form { display: grid; gap: 1rem; }
-        input, select {
-            padding: 0.75rem;
-            border: 1px solid #64748b;
-            border-radius: 0.5rem;
-            background: #334155;
-            color: #f1f5f9;
-        }
-        input:focus, select:focus { outline: none; border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
-        button {
-            background: #059669;
-            color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-        }
-        button:hover { background: #047857; transform: translateY(-3px); }
-        .error { color: #ef4444; font-size: 0.875rem; }
-        .success { color: #10b981; font-size: 0.875rem; animation: fadeIn 0.6s; }
-        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
-        footer { background: #0f172a; color: white; text-align: center; padding: 1rem; }
-        h2 { color: #10b981; }
-        ul { padding-left: 1rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mansoura Paddle Open 2026</title>
+<style>
+  /* ---------- Reset ---------- */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, sans-serif; background:#0f172a; color:#f1f5f9; overflow-x:hidden; scroll-behavior:smooth; }
+  a { text-decoration:none; color:inherit; }
+
+  /* ---------- Cursor Paddle ---------- */
+  body { cursor: none; }
+  #cursor {
+    position: fixed;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #10b981 0%, #047857 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 24px;
+    pointer-events: none; transform: translate(-50%, -50%);
+    transition: transform 0.05s linear;
+    z-index: 9999;
+  }
+
+  /* ---------- Header ---------- */
+  header { position: fixed; width:100%; top:0; background: rgba(15,23,42,0.95); backdrop-filter:blur(10px); z-index:10; }
+  nav { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:1rem; }
+  .logo { background:#059669; padding:0.5rem 1rem; border-radius:1rem; font-weight:bold; transition:0.3s; }
+  .logo:hover { transform:scale(1.05); }
+  nav a { margin:0 1rem; transition:0.3s; }
+  nav a:hover { color:#10b981; transform:translateY(-2px); }
+
+  /* ---------- Main Sections ---------- */
+  main { padding-top:5rem; }
+
+  section { max-width:1200px; margin:2rem auto; padding:2rem; opacity:0; transform:translateY(50px); transition:all 1s ease; }
+
+  section.show { opacity:1; transform:translateY(0); }
+
+  /* Hero */
+  .hero { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; }
+  .hero h1 { font-size:3rem; color:#f1f5f9; }
+  .hero p { color:#cbd5e1; margin:1rem 0; }
+  .btn { display:inline-block; background:#059669; color:white; padding:0.75rem 1.5rem; border-radius:0.5rem; margin:0.5rem; transition:0.3s; box-shadow:0 4px 10px rgba(5,150,105,0.3); }
+  .btn:hover { background:#047857; transform:translateY(-3px) scale(1.05); }
+  .btn.secondary { background:#334155; }
+  .btn.secondary:hover { background:#475569; }
+
+  /* Cards & Grid */
+  .card { background: linear-gradient(135deg,#1e293b,#334155); border-radius:1rem; padding:1rem; margin:1rem 0; box-shadow:0 2px 4px rgba(0,0,0,0.3); transition:0.5s; }
+  .card:hover { transform:translateY(-5px) scale(1.02); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; }
+
+  /* Form */
+  form { display:grid; gap:1rem; }
+  input, select { padding:0.75rem; border-radius:0.5rem; border:none; background:#334155; color:white; }
+  button { background:#059669; padding:0.75rem; border:none; border-radius:0.5rem; cursor:pointer; transition:0.3s; }
+  button:hover { background:#047857; transform:scale(1.05); }
+
+  /* Live Bracket */
+  .live-bracket .match { display:flex; justify-content:space-between; align-items:center; background:linear-gradient(135deg,#ffffff,#fef3c7); padding:1rem; border-radius:0.5rem; margin:1rem 0; transition:0.3s; }
+  .live-bracket .match:hover { transform:scale(1.02); }
+  .team { flex:1; text-align:center; font-weight:bold; }
+  .team.winner { color:#059669; background:linear-gradient(135deg,#ecfdf5,#d1fae5); border-radius:0.5rem; padding:0.5rem; }
+
+  /* Footer */
+  footer { text-align:center; padding:1rem; background:#0f172a; color:white; }
+
+  /* Responsive */
+  @media(max-width:900px){ .hero{grid-template-columns:1fr;} }
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Mansoura</div>
-            <div>
-                <a href="#about">About</a>
-                <a href="#schedule">Schedule</a>
-                <a href="#register">Register</a>
-                <a href="#sponsors">Sponsors</a>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div>
-                <h1>Mansoura Paddle Open 2026</h1>
-                <p>The biggest university paddle tournament — singles & doubles. Great prizes, food trucks, and evening social events!</p>
-                <a href="#register" class="btn">Register Now</a>
-                <a href="#schedule" class="btn secondary">View Schedule</a>
-            </div>
-            <div>
-                <img src="https://images.unsplash.com/photo-1599058917210-23d3e1f0c8d1?auto=format&fit=crop&w=600&q=80" alt="Paddle" style="width:100%; border-radius:1rem;">
-            </div>
-        </section>
+<div id="cursor">🏓</div>
 
-        <!-- About Section -->
-        <section id="about" class="card">
-            <h2>About the Tournament</h2>
-            <p>The Mansoura Paddle Open is the largest university paddle competition in the region. Players from all over the country join to compete in singles and doubles categories. Whether you are a pro or beginner, there's a category for everyone.</p>
-        </section>
+<header>
+  <nav>
+    <div class="logo">Mansoura</div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#register">Register</a>
+      <a href="#sponsors">Sponsors</a>
+      <a href="#bracket">Live Bracket</a>
+    </div>
+  </nav>
+</header>
 
-        <!-- Schedule Section -->
-        <section id="schedule" class="card">
-            <h2>Schedule</h2>
-            <ul>
-                <li>March 10, 2026 - Registration & Opening Ceremony</li>
-                <li>March 11, 2026 - Singles Matches</li>
-                <li>March 12, 2026 - Doubles Matches</li>
-                <li>March 13, 2026 - Finals & Awards</li>
-            </ul>
-        </section>
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <h1>Mansoura Paddle Open 2026</h1>
+      <p>The biggest university paddle tournament — singles & doubles. Great prizes, food trucks, and evening social events!</p>
+      <a href="#register" class="btn">Register Now</a>
+      <a href="#schedule" class="btn secondary">View Schedule</a>
+    </div>
+    <div>
+      <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(to top right,#ecfdf5,#d1fae5);border-radius:1.5rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 15px rgba(0,0,0,0.3);">
+        <div style="text-align:center;font-size:5rem;">🎾</div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Registration Form Section -->
-        <section id="register" class="card">
-            <h2>Registration Form</h2>
-            <form id="regForm">
-                <div>
-                    <label>Full Name</label>
-                    <input type="text" id="name" placeholder="Your full name" required>
-                    <div id="nameError" class="error"></div>
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input type="email" id="email" placeholder="your@email.com" required>
-                    <div id="emailError" class="error"></div>
-                </div>
-                <div>
-                    <label>Phone Number</label>
-                    <input type="tel" id="phone" placeholder="+1 234 567 890" required>
-                    <div id="phoneError" class="error"></div>
-                </div>
-                <div>
-                    <label>Category</label>
-                    <select id="category" required>
-                        <option>Singles</option>
-                        <option>Doubles</option>
-                    </select>
-                </div>
-                <button type="submit">Register</button>
-                <div id="success" class="success" style="display: none;">Submitted! We'll contact you soon.</div>
-            </form>
-        </section>
+  <!-- About -->
+  <section id="about" class="card">
+    <h2>About the Event</h2>
+    <p>An open competition for students and organizations; our goal is to promote the sport and support local clubs. Prizes for winners and entertainment activities included.</p>
+    <div class="grid">
+      <div class="card"><div>Date</div><div style="font-weight:bold;">March 12-14, 2026</div></div>
+      <div class="card"><div>Location</div><div style="font-weight:bold;">Mansoura Sports Club</div></div>
+      <div class="card"><div>Categories</div><div style="font-weight:bold;">Singles & Doubles</div></div>
+    </div>
+  </section>
 
-        <!-- Sponsors Section -->
-        <section id="sponsors" class="card">
-            <h2>Sponsors</h2>
-            <div class="grid">
-                <div class="card">Sponsor 1</div>
-                <div class="card">Sponsor 2</div>
-                <div class="card">Sponsor 3</div>
-                <div class="card">Sponsor 4</div>
-            </div>
-        </section>
-    </main>
+  <!-- Schedule -->
+  <section id="schedule">
+    <h2>Schedule</h2>
+    <div class="grid">
+      <div class="card"><div>March 12</div><ul><li>Registration & Check-in</li><li>Group stage: Singles</li></ul></div>
+      <div class="card"><div>March 13</div><ul><li>Group stage: Doubles</li><li>Quarterfinals</li></ul></div>
+      <div class="card"><div>March 14</div><ul><li>Semifinals</li><li>Finals & Awards</li></ul></div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2026 Mansoura Paddle Open</p>
-    </footer>
+  <!-- Registration -->
+  <section id="register" class="card">
+    <h2>Registration Form</h2>
+    <form action="https://formspree.io/f/your_form_id" method="POST">
+      <input type="text" name="name" placeholder="Your full name" required>
+      <input type="email" name="email" placeholder="your@email.com" required>
+      <input type="tel" name="phone" placeholder="+20 123 456 7890" required>
+      <select name="category" required>
+        <option value="">Select Category</option>
+        <option>Singles</option>
+        <option>Doubles</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
+  </section>
 
-    <script>
-        document.getElementById('regForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            let errors = false;
+  <!-- Sponsors -->
+  <section id="sponsors" class="card">
+    <h2>Sponsors</h2>
+    <div class="grid">
+      <div class="card">Sponsor 1</div>
+      <div class="card">Sponsor 2</div>
+      <div class="card">Sponsor 3</div>
+    </div>
+  </section>
 
-            document.getElementById('nameError').textContent = '';
-            document.getElementById('emailError').textContent = '';
-            document.getElementById('phoneError').textContent = '';
+  <!-- Live Bracket -->
+  <section id="bracket" class="live-bracket card">
+    <h2>Live Bracket</h2>
+    <div class="match"><div class="team">Team A</div><div class="team winner">Team B</div></div>
+    <div class="match"><div class="team winner">Team C</div><div class="team">Team D</div></div>
+  </section>
+</main>
 
-            if (!name) {
-                document.getElementById('nameError').textContent = 'Name is required';
-                errors = true;
-            }
-            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-                document.getElementById('emailError').textContent = 'Invalid email';
-                errors = true;
-            }
-            if (!phone.match(/^\+?[0-9]{7,15}$/)) {
-                document.getElementById('phoneError').textContent = 'Invalid phone number';
-                errors = true;
-            }
+<footer>
+  &copy; 2026 Mansoura Paddle Open
+</footer>
 
-            if (!errors) {
-                document.getElementById('success').style.display = 'block';
-                this.reset();
-            }
-        });
-    </script>
+<script>
+  // Cursor paddle movement
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => { cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; });
+
+  // Scroll animations
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){ entry.target.classList.add('show'); }
+    });
+  }, { threshold:0.2 });
+  sections.forEach(sec => observer.observe(sec));
+</script>
+
 </body>
 </html>
